@@ -38,6 +38,35 @@ Dependencies always point **inward** →
 
 ---
 
+## ▶️ Project run command
+
+First build-
+
+```bash
+make build
+```
+
+then (This will run build project)-
+
+```bash
+make run
+```
+
+if need to run migrations
+for up-
+
+```bash
+make migrate-up
+```
+
+for down-
+
+```bash
+make migrate-down
+```
+
+---
+
 ## 📂 Folder Structure
 
 ```
