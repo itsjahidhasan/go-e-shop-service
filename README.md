@@ -21,6 +21,7 @@ It follows **Clean Architecture principles** for better maintainability, testabi
 
 Clean Architecture layers used:
 
+```
 +-------------------------------+
 | Frameworks & Drivers | -> HTTP, Database, etc.
 +-------------------------------+
@@ -30,14 +31,16 @@ Clean Architecture layers used:
 +-------------------------------+
 | Entities / Domain | -> Core Models
 +-------------------------------+
+```
 
-Dependencies always point **inward** →  
+Dependencies always point **inward** →
 `Infrastructure → Repository → UseCase → Domain`
 
 ---
 
 ## 📂 Folder Structure
 
+```
 go-e-shop-service/
 │
 ├── cmd/
@@ -80,6 +83,7 @@ go-e-shop-service/
 ├── go.mod
 ├── go.sum
 └── README.md
+```
 
 ---
 
