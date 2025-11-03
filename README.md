@@ -52,7 +52,8 @@ then (This will run build project)-
 make run
 ```
 
-if need to run migrations
+## if need to run migrations
+
 for up-
 
 ```bash
