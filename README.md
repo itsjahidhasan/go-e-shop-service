@@ -44,9 +44,10 @@ Dependencies always point **inward** →
 go-e-shop-service/
 │
 ├── cmd/
-│ └── server/
-│ └── main.go # Application entry point
-│
+│ |── server/
+│ | └── main.go # Application entry point
+| |── migration/
+│ | └── main.go # Database migration logic
 ├── internal/
 │ ├── domain/ # Core business models
 │ │ └── user.go # Defines User entity
@@ -68,9 +69,6 @@ go-e-shop-service/
 │ │ │ ├── auth_handler.go # HTTP layer for auth endpoints
 │ │ │ ├── user_handler.go # HTTP layer for user endpoints
 │ │ │ └── ... # Other feature handlers
-│ │ │
-│ │ └── config/
-│ │ └── env.go # Loads .env configuration
 │ │
 │ └── utils/ # Optional helpers/utilities
 │ └── response.go # Standardized JSON responses
