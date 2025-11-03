@@ -24,7 +24,7 @@ func main() {
 	if dsn == "" {
 		log.Fatal("❌ POSTGRES_DSN not set in environment")
 	}
-
+	log.Println("✅ DB Path:", dsn)
 	database, err := db.ConnectPostgres(dsn)
 	if err != nil {
 		log.Fatal(err)
@@ -38,11 +38,11 @@ func main() {
 
 	port := os.Getenv("APP_PORT")
 	if port == "" {
-		port = ":8080"
+		port = "8080"
 	}
 
 	log.Println("🚀 Server running on", port)
-	if err := http.ListenAndServe(port, router); err != nil {
-		log.Fatal(err)
+	if err := http.ListenAndServe(":"+port, router); err != nil {
+		log.Fatal("error starting server:", err)
 	}
 }
