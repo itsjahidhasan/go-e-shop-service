@@ -2,13 +2,18 @@
 package http
 
 import (
-	"go-e-shop-service/internal/infrastructure/http/handler"
+	"database/sql"
 	"go-e-shop-service/internal/infrastructure/http/routes"
 	"net/http"
 )
 
-func SetupRouter(authHandler *handler.AuthHandler) *http.ServeMux {
+func SetupRouter(db *sql.DB) *http.ServeMux {
 	mux := http.NewServeMux()
-	routes.AuthRoutes(mux, authHandler)
+	// welcome routes
+	mux.HandleFunc("/",func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Welcome to the E-Commerce API!"))
+	})
+
+	routes.AuthRoutes(mux,db)
 	return mux
 }

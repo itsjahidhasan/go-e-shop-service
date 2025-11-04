@@ -2,22 +2,18 @@ package main
 
 import (
 	"fmt"
+	"go-e-shop-service/internal/config"
 	"go-e-shop-service/internal/infrastructure/db"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
-
-	"github.com/joho/godotenv"
 )
 
 func main() {
 	// Load environment variables
-	if err := godotenv.Load(); err != nil {
-		log.Println("⚠️  No .env file found, using system environment")
-	}
-
-	dsn := os.Getenv("POSTGRES_DSN")
+	cfg:= config.LoadConfig()
+	dsn := cfg.PostGresConnString
 	if dsn == "" {
 		log.Fatal("❌ POSTGRES_DSN not set in environment")
 	}
