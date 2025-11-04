@@ -86,8 +86,7 @@ go-e-shop-service/
 │ │ └── auth_usecase.go # Login/Register business logic
 │ │
 │ ├── repository/ # Repository interfaces & implementations
-│ │ ├── user_repo.go # Interface (abstract)
-│ │ └── user_repo_postgres.go # Postgres implementation
+│ │ ├── user_repo.go # Interface implementation
 │ │
 │ ├── infrastructure/ # Frameworks, DB, HTTP
 │ │ ├── db/
@@ -99,7 +98,14 @@ go-e-shop-service/
 │ │ │ ├── auth_handler.go # HTTP layer for auth endpoints
 │ │ │ ├── user_handler.go # HTTP layer for user endpoints
 │ │ │ └── ... # Other feature handlers
-│ │
+│ │ ├── swagger-docs/
+│ │ │ ├── swagger
+│ │ │ │ ├── paths # here API wise route docs 
+│ │ │ │ ├── schemas # here all the model of db and key types
+│ │ │ │ ├── tags # here Route combination tags
+│ │ │ │ └── swagger.go # paths, tags and schemas are added here and combined into a json file
+│ │ │ ├── swagger-ui #here is all the ui's handled 
+│ │ │ └── docs.go # swagger routes and ui file integrations
 │ └── utils/ # Optional helpers/utilities
 │ └── response.go # Standardized JSON responses
 │
