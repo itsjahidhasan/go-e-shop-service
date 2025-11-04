@@ -24,12 +24,11 @@ func main() {
 	}
 	defer database.Close()
 
-	
 	router := apphttp.SetupRouter(database)
 
-
-
 	log.Println("🚀 Server running on:", cfg.AppServer)
+	log.Println("📂 Swagger Docs: ", cfg.AppServer+`/swagger/`)
+
 	if err := http.ListenAndServe(cfg.AppPort, router); err != nil {
 		log.Fatal("error starting server:", err)
 	}
