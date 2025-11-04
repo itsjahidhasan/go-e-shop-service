@@ -2,6 +2,7 @@
 package usecase
 
 import (
+	"context"
 	"errors"
 	"go-e-shop-service/internal/domain"
 
@@ -16,14 +17,14 @@ func NewAuthUseCase(repo domain.UserRepository) *AuthUseCase {
 	return &AuthUseCase{repo}
 }
 
-func (uc *AuthUseCase) Register(name, email, password string) error {
+func (uc *AuthUseCase) Register(ctx context.Context, name, email, password string) error {
 	hashed, _ := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	user := &domain.User{Name: name, Email: email, Password: string(hashed)}
-	return uc.repo.Create(user)
+	return uc.repo.Create(ctx, user)
 }
 
-func (uc *AuthUseCase) Login(email, password string) (*domain.User, error) {
-	user, err := uc.repo.FindByEmail(email)
+func (uc *AuthUseCase) Login(ctx context.Context, email, password string) (*domain.User, error) {
+	user, err := uc.repo.FindByEmail(ctx, email)
 	if err != nil || user == nil {
 		return nil, errors.New("user not found")
 	}

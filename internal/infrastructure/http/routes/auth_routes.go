@@ -8,7 +8,6 @@ import (
 	"net/http"
 )
 
-
 func AuthRoutes(mux *http.ServeMux, db *sql.DB) {
 	userRepo := repository.NewUserRepoPostgres(db)
 	authUC := usecase.NewAuthUseCase(userRepo)
@@ -16,4 +15,5 @@ func AuthRoutes(mux *http.ServeMux, db *sql.DB) {
 
 	//this are handler routes
 	mux.HandleFunc("/register", authHandler.Register)
+	mux.HandleFunc("/login", authHandler.Login)
 }

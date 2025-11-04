@@ -5,10 +5,12 @@ import (
 	"database/sql"
 	"go-e-shop-service/internal/infrastructure/http/routes"
 	swaggerdocs "go-e-shop-service/internal/infrastructure/swagger-docs"
+	"go-e-shop-service/internal/infrastructure/swagger-docs/swagger"
 	"net/http"
 )
 
 func SetupRouter(db *sql.DB) *http.ServeMux {
+	swagger.PreGenerateSwagger()
 	mux := http.NewServeMux()
 	swaggerdocs.SetSwaggerDocs(mux)
 	// welcome routes

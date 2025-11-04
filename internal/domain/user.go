@@ -1,16 +1,19 @@
 package domain
 
-import "time"
+import (
+	"context"
+	"time"
+)
 
 type User struct {
-	ID       string
-	Name     string
-	Email    string
-	Password string
+	ID        string
+	Name      string
+	Email     string
+	Password  string
 	CreatedAt time.Time
 }
 
 type UserRepository interface {
-	Create(user *User) error
-	FindByEmail(email string) (*User, error)
+	Create(ctx context.Context, user *User) error
+	FindByEmail(ctx context.Context, email string) (*User, error)
 }

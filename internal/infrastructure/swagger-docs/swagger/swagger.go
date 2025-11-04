@@ -25,12 +25,12 @@ func mergeSwaggerElements(el ...map[string]interface{}) map[string]interface{} {
 	return merged
 }
 
-// SwaggerDocs serves the Swagger JSON, cached after first generation
-func SwaggerDocs(w http.ResponseWriter, r *http.Request) {
-	cfg := config.LoadConfig()
-
+// SwaggerDocs serves the Swagger JSON
+func PreGenerateSwagger() {
 	// Generate & cache Swagger JSON only once
 	cacheOnce.Do(func() {
+		cfg := config.LoadConfig()
+
 		sw := map[string]interface{}{
 			"openapi": "3.0.0",
 			"info": map[string]interface{}{
@@ -46,10 +46,16 @@ func SwaggerDocs(w http.ResponseWriter, r *http.Request) {
 			"components": map[string]interface{}{"schemas": schemas.UserSchema},
 		}
 
-		// Marshal to JSON once and cache
-		cachedSwaggerJSON, _ = json.Marshal(sw)
+		var err error
+		cachedSwaggerJSON, err = json.Marshal(sw)
+		if err != nil {
+			panic("Failed to generate Swagger JSON: " + err.Error())
+		}
 	})
 
+}
+
+func SwaggerDocs(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(cachedSwaggerJSON)
 }
