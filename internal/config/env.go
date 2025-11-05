@@ -27,12 +27,12 @@ func LoadConfig() *Config {
 		env = "development"
 	}
 	if port == "" {
-		port = ":8080"
+		port = "8080"
 	}
 	return &Config{
 		AppEnv:  env,
 		AppServer:  server+":"+port,
-		AppPort: port,
+		AppPort: ":"+port,
 		PostGresConnString: dns,
 	}
 }
